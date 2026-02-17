@@ -115,8 +115,10 @@
 
     <script>
         const SK = "AB_ULTRA_2026";
-        const joursGratuits =; // Lundi & Vendredi
+        const joursGratuits = [1, 5]; // 1 = Lundi, 5 = Vendredi
         const estGratuit = joursGratuits.includes(new Date().getDay());
+        let duration = estGratuit ? 2 : 10; 
+        let elapsed = 0;
         let correctMath;
 
         // --- SÉCURITÉ AES ---
