@@ -1,0 +1,10 @@
+# Forcer les fichiers texte en LF
+* text=auto
+
+# Gérer les fichiers binaires (images, mp3, pdf)
+*.png binary
+*.jpg binary
+*.pdf binary
+*.mp3 binary
+*.mp4 binary
+
