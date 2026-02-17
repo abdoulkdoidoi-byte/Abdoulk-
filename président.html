@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Présidents - Abdoulk Diodoi</title>
+    <style>
+        :root { --ai: #00d2ff; --accent: #00ff88; --bg: #050505; --card: #111; }
+        body { background: var(--bg); color: white; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; }
+        
+        .quiz-card { 
+            background: var(--card); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px solid var(--ai); 
+            max-width: 400px; 
+            margin: 40px auto; 
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        .question-box { font-size: 1.2rem; margin-bottom: 25px; min-height: 60px; color: #fff; }
+        
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+        .btn-option { 
+            background: #1a1a1a; 
+            color: white; 
+            border: 1px solid #333; 
+            padding: 15px; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-option:hover { 
+            border-color: var(--ai); 
+            background: rgba(0, 210, 255, 0.1); 
+            transform: scale(1.02);
+        }
+
+        .points-info { margin-top: 20px; color: var(--accent); font-weight: 800; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-card">
+        <h1 style="color: var(--ai); font-size: 1.5rem;">🏛️ EMPIRE POLITIQUE</h1>
+        <div id="pres-q" class="question-box">Chargement de la question...</div>
+        
+        <div id="pres-options" class="options-grid">
+            <!-- Les boutons s'afficheront ici -->
+        </div>
+
+        <div class="points-info">VALEUR : +10 POINTS PRESTIGE</div>
+        <p style="font-size: 9px; color: #444; margin-top: 20px;">DESIGN BY ABDOULK DIODOI © 2026</p>
+    </div>
+
+    <script>
+        // Données mises à jour Février 2026
+        const presData = {
+            "Burkina Faso": ["Maurice Yaméogo", "Thomas Sankara", "Blaise Compaoré", "Ibrahim Traoré"],
+            "USA": ["Franklin Roosevelt", "Barack Obama", "Joe Biden", "Donald Trump"],
+            "France": ["Charles de Gaulle", "Nicolas Sarkozy", "Emmanuel Macron"],
+            "Mali": ["Modibo Keïta", "Moussa Traoré", "IBK", "Assimi Goïta"],
+            "Russie": ["Boris Eltsine", "Vladimir Poutine"]
+        };
+
+        function chargerQuizPres() {
+            const paysList = Object.keys(presData);
+            const paysChoisi = paysList[Math.floor(Math.random() * paysList.length)];
+            const liste = presData[paysChoisi];
+            const bonneReponse = liste[liste.length - 1]; // Le dernier de la liste est le président actuel
+
+            document.getElementById('pres-q').innerHTML = `Qui est le Président actuel au <b style="color:var(--ai)">${paysChoisi}</b> en 2026 ?`;
+            
+            // Préparation des options (Bonne réponse + 3 faux)
+            const fauxNoms = ["Alassane Ouattara", "Paul Biya", "Macky Sall", "Patrice Talon", "Abdoulaye Wade", "Ousmane Sonko"];
+            let choix = [bonneReponse];
+            
+            while(choix.length < 4) {
+                let f = fauxNoms[Math.floor(Math.random() * fauxNoms.length)];
+                if(!choix.includes(f)) choix.push(f);
+            }
+            
+            // Mélanger les options
+            choix.sort(() => Math.random() - 0.5);
+
+            const container = document.getElementById('pres-options');
+            container.innerHTML = "";
+            
+            choix.forEach(nom => {
+                const btn = document.createElement('button');
+                btn.className = "btn-option";
+                btn.innerText = nom;
+                btn.onclick = () => verifier(nom, bonneReponse);
+                container.appendChild(btn);
+            });
+        }
+
+        function verifier(reponse, correcte) {
+            if(reponse === correcte) {
+                alert("✅ EXACT ! +10 Points pour l'Empire.");
+                
+                // Si la fonction addPts existe dans index.html
+                if(typeof window.parent.addPts === "function") {
+                    window.parent.addPts(10);
+                } else if(typeof addPts === "function") {
+                    addPts(10);
+                }
+
+                chargerQuizPres(); // Question suivante
+            } else {
+                alert("❌ MAUVAISE RÉPONSE ! Révise tes classiques.");
+            }
+        }
+
+        // Lancement
+        window.onload = chargerQuizPres;
+    </script>
+</body>
+</html>
+
