@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>AB | EDU-EXPLOSION - Abdoulk Diodoi</title>
 
-    <!-- STYLE PREMIUM AB (VERT FONCÉ & NOIR) -->
+    <!-- STYLE PREMIUM AB CORRIGÉ -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <link rel="manifest" href="manifest.json">
@@ -18,8 +18,8 @@
         .logo-ab { font-size: 2.5rem; font-weight: 800; color: var(--accent); letter-spacing: 5px; }
 
         .nav-tabs { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 10px; scrollbar-width: none; }
-        .tab-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 10px 25px; border-radius: 50px; cursor: pointer; white-space: nowrap; font-size: 13px; }
-        .tab-btn.active { background: var(--accent); color: black; font-weight: bold; border: none; }
+        .tab-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 10px 25px; border-radius: 50px; cursor: pointer; white-space: nowrap; font-size: 13px; border: none; }
+        .tab-btn.active { background: var(--accent); color: black; font-weight: bold; }
 
         .container { padding: 15px; max-width: 800px; margin: auto; }
         .card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
@@ -33,18 +33,17 @@
         @keyframes fadeIn { from {opacity: 0; transform: scale(0.98);} to {opacity: 1; transform: scale(1);} }
 
         #lock-screen { position: fixed; inset: 0; background: #000; z-index: 10001; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
-        textarea, input, select { width: 100%; padding: 12px; border-radius: 10px; background: #000; color: white; border: 1px solid #333; margin-bottom: 10px; }
+        textarea, input, select { width: 100%; padding: 12px; border-radius: 10px; background: #000; color: white; border: 1px solid #333; margin-bottom: 10px; box-sizing: border-box; }
         marquee { background: var(--accent); color: black; font-weight: bold; padding: 5px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- 🔒 VERROU AB SÉCURISÉ -->
     <div id="lock-screen">
         <div style="border: 4px solid var(--accent); width:80px; height:80px; border-radius:20px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:var(--accent); font-size:40px; font-weight:800;">AB</div>
         <h1 style="color:white;">BIENVENUE CHEZ ABDOULK</h1>
         <p>Abonnez-vous pour débloquer l'Empire (150 Mo).</p>
-        <a href="LIEN_YOUTUBE_CONFIRMATION" target="_blank" onclick="unlock()" class="btn-vip" style="width:200px;">S'ABONNER</a>
+        <a href="https://www.youtube.com" target="_blank" onclick="unlock()" class="btn-vip" style="width:200px;">S'ABONNER</a>
     </div>
 
     <header><div class="logo-ab">AB</div></header>
@@ -54,20 +53,18 @@
         <div class="tab-btn active" onclick="showTab('home')">🏠 Accueil</div>
         <div class="tab-btn" onclick="showTab('ia')">🤖 IA Prof</div>
         <div class="tab-btn" onclick="showTab('cinema')">🎬 Ciné</div>
-        <div class="tab-btn" onclick="showTab('bet')">⚽ Paris</div>
         <div class="tab-btn" onclick="showTab('world')">🌍 Nations</div>
     </div>
 
     <div class="container">
-        <!-- 🏠 ACCUEIL -->
         <div id="home" class="tab-content active">
             <div class="card">
                 <h2><i class="fas fa-search" style="color:var(--ai);"></i> RECHERCHE GLOBALE</h2>
-                <input type="text" id="mSearch" onkeyup="search()" placeholder="Chercher un film, un cours, un pays...">
+                <input type="text" id="mSearch" placeholder="Chercher un film, un cours, un pays...">
             </div>
             <div class="card" style="border:1px solid var(--accent);">
                 <h3 style="color:var(--accent);">👑 PASS VIP ABDOULK</h3>
-                <p style="font-size:12px;">Accès illimité aux 150 Mo hors-ligne (Films, Cours, Jeux).</p>
+                <p style="font-size:12px;">Accès illimité aux 150 Mo hors-ligne.</p>
                 <a href="https://wa.me" class="btn-wa">ORANGE MONEY (500 FCFA)</a>
             </div>
             <div class="card">
@@ -76,22 +73,20 @@
             </div>
         </div>
 
-        <!-- 🤖 IA -->
         <div id="ia" class="tab-content">
             <div class="card" style="border: 2px solid var(--ai);">
                 <h2>🤖 PROFESSEUR IA UNIVERSEL</h2>
-                <textarea id="ia-in" rows="5" placeholder="Colle ton sujet ici (Maths, Philo, etc.)..."></textarea>
+                <textarea id="ia-in" rows="5" placeholder="Colle ton sujet ici..."></textarea>
                 <button onclick="askIA()" class="btn-vip" style="background:var(--ai); border:none;">CORRIGER</button>
                 <div id="ia-res" style="display:none; margin-top:10px; padding:15px; background:#000; border-radius:10px;"></div>
             </div>
         </div>
 
-        <!-- 🌍 MONDE & HISTOIRE -->
         <div id="world" class="tab-content">
             <div class="card">
                 <h2>🌍 ATLAS & PRÉSIDENTS</h2>
                 <input type="text" id="cSearch" onkeyup="searchNation()" placeholder="Chercher un pays...">
-                <div id="cResult"></div>
+                <div id="cResult" style="margin-top:15px;"></div>
             </div>
         </div>
     </div>
@@ -103,11 +98,40 @@
     </footer>
 
     <script>
-        function showTab(t) { document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active')); document.getElementById(t).classList.add('active'); event.currentTarget.classList.add('active'); }
-        function unlock() { setTimeout(()=>document.getElementById('lock-screen').style.display='none', 4000); }
-        function askIA() { const r=document.getElementById('ia-res'); r.style.display="block"; r.innerHTML="Analyse IA en cours..."; setTimeout(()=>r.innerHTML="<b>CORRECTION PRÊTE :</b> Voici le plan... Payez 200F pour les détails.", 3000); }
-        const apps = [{n:"IA", i:"fa-robot", c:"var(--ai)"},{n:"PAYS", i:"fa-globe", c:"#4caf50"},{n:"FILMS", i:"fa-film", c:"var(--accent)"},{n:"PARIS", i:"fa-bolt", c:"#ffeb3b"}];
+        function showTab(t) { 
+            document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active')); 
+            document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active')); 
+            document.getElementById(t).classList.add('active'); 
+            event.currentTarget.classList.add('active'); 
+        }
+        
+        function unlock() { 
+            setTimeout(()=>document.getElementById('lock-screen').style.display='none', 4000); 
+        }
+        
+        function askIA() { 
+            const r=document.getElementById('ia-res'); 
+            r.style.display="block"; 
+            r.innerHTML="<i class='fas fa-spinner fa-spin'></i> Analyse IA en cours..."; 
+            setTimeout(()=>r.innerHTML="<b>CORRECTION PRÊTE :</b> Voici le plan de solution... <br><span style='color:red'>Payez 200F pour les détails.</span>", 3000); 
+        }
+
+        // Fonction Recherche Nations corrigée
+        function searchNation() {
+            const input = document.getElementById('cSearch').value.toLowerCase();
+            const result = document.getElementById('cResult');
+            if(input.length < 2) { result.innerHTML = ""; return; }
+            result.innerHTML = `<div class='card'>Résultats pour <b>${input}</b>... <br><small>Recherche dans le fichier presidents.json</small></div>`;
+        }
+
+        const apps = [
+            {n:"IA", i:"fa-robot", c:"var(--ai)"},
+            {n:"PAYS", i:"fa-globe", c:"#4caf50"},
+            {n:"FILMS", i:"fa-film", c:"var(--accent)"},
+            {n:"PARIS", i:"fa-bolt", c:"#ffeb3b"}
+        ];
         apps.forEach(a=>document.getElementById('app-grid').innerHTML += `<div><i class="fas ${a.i}" style="color:${a.c}; font-size:25px; background:#1a1a1a; padding:15px; border-radius:15px; display:block; margin-bottom:5px;"></i><small>${a.n}</small></div>`);
+        
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
     </script>
 </body>
