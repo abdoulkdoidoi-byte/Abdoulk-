@@ -3,38 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Master - Abdoulk Diodoi</title>
+    <title>Maths Flash - Abdoulk Diodoi</title>
+    <!-- On garde ton style mais on l'améliore un peu pour le design 2026 -->
     <style>
-        body { background: #050505; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .quiz-card { background: #111; padding: 30px; border-radius: 20px; border: 2px solid #ffeb3b; max-width: 400px; margin: auto; }
-        .q { font-size: 1.5rem; margin-bottom: 20px; color: #ffeb3b; }
-        input { width: 80%; padding: 12px; border-radius: 10px; border: none; margin-bottom: 10px; font-size: 1rem; }
-        button { background: #ffeb3b; color: black; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+        body { background: #050505; color: white; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; }
+        .quiz-card { 
+            background: #111; 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px solid #ffeb3b; 
+            max-width: 400px; 
+            margin: 50px auto; 
+            box-shadow: 0 0 15px rgba(255, 235, 59, 0.2);
+        }
+        .q { font-size: 2.5rem; margin-bottom: 20px; color: #ffeb3b; font-weight: 800; }
+        input { 
+            width: 80%; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: 1px solid #333; 
+            background: #000; 
+            color: #00ff88; 
+            margin-bottom: 15px; 
+            font-size: 1.5rem; 
+            text-align: center; 
+        }
+        button { 
+            background: #ffeb3b; 
+            color: black; 
+            border: none; 
+            padding: 15px 40px; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 1.1rem;
+            width: 100%;
+        }
+        .score-box { margin-top: 15px; font-weight: 600; color: #ffd700; }
     </style>
 </head>
 <body>
+
     <div class="quiz-card">
         <h1>🧮 MATHS FLASH</h1>
-        <div id="question" class="q">Chargement...</div>
-        <input type="number" id="answer" placeholder="Ta réponse">
-        <br><br>
-        <button onclick="check()">VALIDER</button>
-        <p>Score : <span id="score">0</span></p>
-        <p style="font-size: 10px; color: #555;">Par Abdoulk Diodoi</p>
+        <!-- CORRECTION : IDs synchronisés avec le script -->
+        <div id="math-q" class="q">Chargement...</div>
+        <input type="number" id="math-input" placeholder="Ta réponse">
+        <br>
+        <button onclick="checkMath()">VALIDER</button>
+        
+        <div class="score-box">Points gagnés : <span id="display-score">0</span></div>
+        <p style="font-size: 10px; color: #555; margin-top: 20px;">Propriété de Abdoulk Diodoi © 2026</p>
     </div>
+
     <script>
-        let s=0, a;
-        function n() {
-            let x=Math.floor(Math.random()*20), y=Math.floor(Math.random()*20);
-            a=x+y; document.getElementById('question').innerText=`${x} + ${y} = ?`;
-            document.getElementById('answer').value="";
+        let correctMath;
+        let scoreLocal = 0;
+
+        // Fonction pour générer le calcul (Nombres entre 1 et 100)
+        function nextMath() {
+            let x = Math.floor(Math.random() * 100) + 1;
+            let y = Math.floor(Math.random() * 100) + 1;
+            correctMath = x + y;
+            
+            document.getElementById('math-q').innerText = `${x} + ${y} = ?`;
+            document.getElementById('math-input').value = "";
+            document.getElementById('math-input').focus();
         }
-        function check() {
-            if(document.getElementById('answer').value == a) {
-                s++; document.getElementById('score').innerText=s; alert("🎉 Bravo !"); n();
-            } else { alert("❌ Faux, réessaye !"); }
+
+        // Fonction de vérification
+        function checkMath() {
+            let reponseUser = document.getElementById('math-input').value;
+            
+            if(reponseUser == correctMath) {
+                // Si tu es dans l'index.html, addPts() sera reconnu
+                // Sinon, on incrémente le score visible ici
+                scoreLocal += 5;
+                document.getElementById('display-score').innerText = scoreLocal;
+                
+                // Appel à la fonction globale si elle existe
+                if(typeof addPts === "function") {
+                    addPts(5); 
+                }
+
+                alert("🎉 BRAVO ! +5 Points Prestige");
+                nextMath(); 
+            } else {
+                alert("❌ CALCUL FAUX ! Réessaie.");
+                document.getElementById('math-input').value = "";
+                document.getElementById('math-input').focus();
+            }
         }
-        n();
+
+        // Permet de valider avec la touche "Entrée" du clavier
+        document.getElementById('math-input').addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkMath();
+            }
+        });
+
+        // Lancement au démarrage
+        window.onload = nextMath;
     </script>
 </body>
 </html>
