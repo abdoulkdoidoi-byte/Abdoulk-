@@ -4,64 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>ABDOULK | 2026 OFFICIAL</title>
-
-    <!-- SCRIPTS DE SÉCURITÉ ET PUBS -->
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdnjs.cloudflare.com"></script>
-    <script async src="https://pagead2.googlesyndication.com" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     
     <style>
         :root { --primary: #002b1b; --accent: #00ff88; --bg: #050505; --card: #111; --ai: #00d2ff; --gold: #ffd700; }
-        body { margin: 0; background: var(--bg); color: white; font-family: 'Poppins', sans-serif; overflow-x: hidden; -webkit-user-select: none; user-select: none; }
-        
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Poppins', sans-serif; overflow-x: hidden; user-select: none; }
         header { background: var(--primary); padding: 20px; text-align: center; border-bottom: 3px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         .logo-ab { font-size: 1.8rem; font-weight: 800; color: var(--accent); letter-spacing: 5px; text-transform: uppercase; }
-
         .points-box { background: #000; padding: 15px; text-align: center; border-bottom: 1px solid #222; }
         .points-val { font-size: 30px; font-weight: 800; color: var(--gold); }
-
         .nav-tabs { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 8px; scrollbar-width: none; }
-        .tab-btn { background: #1a1a1a; border: none; color: #888; padding: 10px 18px; border-radius: 50px; cursor: pointer; white-space: nowrap; font-size: 11px; font-weight: 600; }
+        .tab-btn { background: #1a1a1a; border: none; color: #888; padding: 10px 18px; border-radius: 50px; cursor: pointer; white-space: nowrap; font-size: 11px; font-weight: 600; transition: 0.3s; }
         .tab-btn.active { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
-
-        .container { padding: 15px; max-width: 800px; margin: auto; }
+        .container { padding: 15px; max-width: 800px; margin: auto; padding-bottom: 100px; }
         .card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 15px; position: relative; }
-        .btn-vip { background: linear-gradient(45deg, var(--accent), #008f4c); color: black; padding: 12px; border-radius: 12px; text-align: center; font-weight: 800; display: block; width: 100%; border: none; cursor: pointer; text-decoration: none; }
-
-        #lock-screen, #edu-tunnel { position: fixed; inset: 0; background: #000; z-index: 10001; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
+        .btn-vip { background: linear-gradient(45deg, var(--accent), #008f4c); color: black; padding: 12px; border-radius: 12px; text-align: center; font-weight: 800; display: block; width: 100%; border: none; cursor: pointer; text-decoration: none; margin-top: 10px; }
+        
+        /* LOCK SCREEN */
+        #lock-screen { position: fixed; inset: 0; background: #000; z-index: 10001; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
         .progress-bg { width: 80%; height: 6px; background: #222; border-radius: 10px; margin: 20px 0; overflow: hidden; }
         #progress-fill { width: 0%; height: 100%; background: var(--accent); transition: width 0.1s linear; }
+        input { width: 100%; padding: 12px; border-radius: 10px; background: #000; color: white; border: 1px solid #333; text-align: center; font-family: inherit; box-sizing: border-box; }
         
-        input, textarea { width: 100%; padding: 12px; border-radius: 10px; background: #000; color: white; border: 1px solid #333; margin-bottom: 10px; text-align: center; font-family: inherit; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; }
-        
-        #viral-radar { background: linear-gradient(90deg, #ff0000, #990000); color:white; padding:12px; text-align:center; font-weight:800; display:none; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        /* MENU ULTRA VERT FONCÉ */
+        #btn-empire-menu { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #004d32; border: 3px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10000; cursor: pointer; box-shadow: 0 0 20px rgba(0,255,136,0.3); }
+        #empire-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.97); z-index:10001; padding:20px; overflow-y:auto; backdrop-filter: blur(10px); }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <audio id="success-sound" src="https://assets.mixkit.co" preload="auto"></audio>
 
-    <!-- ÉCRAN DE VERROUILLAGE & JOURS GRATUITS -->
+    <!-- LOCK SCREEN -->
     <div id="lock-screen">
-        <div style="border: 3px solid var(--accent); width:70px; height:70px; border-radius:15px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; color:var(--accent); font-size:35px; font-weight:800;">AB</div>
-        <h1 id="welcome-msg">ACCÈS ABDOULK</h1>
+        <div style="border: 3px solid var(--accent); width:60px; height:60px; border-radius:15px; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:30px; font-weight:800; margin-bottom:10px;">AB</div>
+        <h2 id="welcome-msg">VÉRIFICATION...</h2>
         <div id="auth-fields">
             <input type="text" id="user-name" placeholder="Nom du Guerrier">
-            <input type="password" id="user-pin" maxlength="4" placeholder="CODE PIN ****" style="letter-spacing:10px;">
+            <input type="password" id="user-pin" maxlength="4" placeholder="PIN ****" style="margin-top:10px; letter-spacing:8px;">
         </div>
         <div class="progress-bg"><div id="progress-fill"></div></div>
-        <button id="unlock-btn" class="btn-vip" style="opacity:0.3; width:220px;" disabled>CHARGEMENT...</button>
-        <a href="https://m.me" style="color:#444; font-size:10px; margin-top:15px; text-decoration:none;">Support Messenger</a>
+        <button id="unlock-btn" class="btn-vip" disabled style="width:200px; opacity:0.3;">CHARGEMENT...</button>
     </div>
 
-    <!-- RADAR VIRAL -->
-    <div id="viral-radar">
-        <div style="font-size:10px;">🔥 EXPLOSION DÉTECTÉE 🔥</div>
-        <div id="viral-name" style="font-size:14px;">NOM_DU_SITE</div>
-        <button onclick="window.open('https://m.me')" class="btn-vip" style="background:white; color:red; margin-top:5px; padding:5px; font-size:10px;">REJOINDRE</button>
+    <!-- BOUTON EMPIRE VERT FONCÉ -->
+    <div id="btn-empire-menu" onclick="toggleEmpireMenu()"><i class="fas fa-th-large"></i></div>
+
+    <!-- MENU OVERLAY -->
+    <div id="empire-overlay">
+        <div style="text-align:right;"><button onclick="toggleEmpireMenu()" style="background:none; border:none; color:white; font-size:30px;">&times;</button></div>
+        <h2 style="color:var(--accent); text-align:center;">EMPIRE ABDOULK</h2>
+        <div class="grid-4" id="empire-grid-full"></div>
     </div>
 
     <header><div class="logo-ab">ABDOULK</div></header>
@@ -69,112 +68,103 @@
     <div class="points-box">
         <div style="font-size:10px; color:#555;">POINTS PRESTIGE</div>
         <div class="points-val"><i class="fas fa-star"></i> <span id="display-points">0</span></div>
-        <button onclick="window.open('https://m.me')" style="background:none; border:none; color:var(--ai); font-size:10px; cursor:pointer;">Échanger mes Points sur Messenger</button>
     </div>
 
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="showTab(event, 'market')">🛍️ Boutique</button>
-        <button class="tab-btn" onclick="showTab(event, 'apps')">📱 Apps</button>
+        <button class="tab-btn active" onclick="showTab(event, 'apps')">📱 Apps & Quiz</button>
         <button class="tab-btn" onclick="showTab(event, 'news')">📰 News</button>
-        <button class="tab-btn" onclick="showTab(event, 'cinema')">🎬 Ciné-Cash</button>
         <button class="tab-btn" onclick="showTab(event, 'vpn')">🛡️ VPN</button>
     </div>
 
     <div class="container">
-        <!-- BOUTIQUE -->
-        <div id="market" class="tab-content active">
-            <div class="card" style="border-color:var(--accent);">
-                <h3>🛍️ MARKETPLACE AB</h3>
-                <button onclick="window.open('https://m.me')" class="btn-vip" style="background:#25d366; color:white;">PUBLIER UN PRODUIT (500F)</button>
+        <!-- APPS -->
+        <div id="apps" class="tab-content active">
+            <div class="card" style="border-color: var(--gold);">
+                <h3 style="margin-top:0;">🧮 MATHS FLASH</h3>
+                <div id="math-q" style="font-size: 24px; font-weight: 800; margin-bottom:10px;">...</div>
+                <input type="number" id="math-input" placeholder="Ta réponse">
+                <button onclick="checkMath()" class="btn-vip" style="background:var(--gold);">VALIDER (+5 PTS)</button>
             </div>
-            <div id="market-list" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div class="card" style="text-align:center; padding:10px;">
-                    <div style="font-size:30px;">📱</div>
-                    <h4 style="margin:5px 0; font-size:12px;">iPhone Star</h4>
-                    <b style="color:var(--accent);">PROMOTION VIP</b>
-                </div>
-            </div>
-        </div>
 
-        <!-- VPN -->
-        <div id="vpn" class="tab-content" style="display:none;">
-            <div class="card" style="border:2px solid var(--ai);">
-                <h3>🛡️ VPN LIBRE (15H-22H)</h3>
-                <p id="vpn-status" style="font-size:11px; color:#666;">Vérification de l'horaire...</p>
-                <button id="vpn-btn" onclick="window.location.href='siapi.ovpn'" class="btn-vip" style="display:none; background:var(--ai); color:white;">TÉLÉCHARGER CONFIG</button>
+            <div class="card" style="border-color: var(--ai);">
+                <h3>🏛️ QUIZ PRÉSIDENTS 2026</h3>
+                <div id="pres-q" style="font-size: 14px; margin-bottom:15px;">...</div>
+                <div id="pres-options" style="display: grid; gap: 10px;"></div>
             </div>
         </div>
 
         <!-- NEWS -->
-        <div id="news" class="tab-content" style="display:none;">
+        <div id="news" class="tab-content">
             <div class="card">
-                <div style="display:flex; gap:5px; margin-bottom:15px;">
-                    <input type="text" id="news-query" onkeyup="if(event.key==='Enter')searchNews()" placeholder="Sujet à scanner..." style="margin:0; flex:1;">
-                    <button onclick="searchNews()" style="background:var(--ai); border:none; border-radius:10px; padding:0 15px; color:white;"><i class="fas fa-search"></i></button>
-                </div>
-                <div id="news-feed" style="max-height:400px; overflow-y:auto;"></div>
+                <button onclick="searchNews()" class="btn-vip">SCANNER LE MONDE</button>
+                <div id="news-feed" style="margin-top:15px;"></div>
             </div>
         </div>
 
-        <!-- CINÉ-CASH -->
-        <div id="cinema" class="tab-content" style="display:none;">
+        <!-- VPN -->
+        <div id="vpn" class="tab-content">
             <div class="card" style="text-align:center;">
-                <h3>🎬 REGARDEZ & GAGNEZ</h3>
-                <video width="100%" controls onended="addPts(10)"><source src="video.mp4"></video>
-                <p style="color:var(--gold); font-weight:800; margin-top:10px;">+10 POINTS PAR VIDÉO</p>
+                <h3>🛡️ ÉTAT DU TUNNEL</h3>
+                <div id="vpn-visual" style="width:40px; height:40px; border-radius:50%; background:#222; margin:10px auto; border:3px solid #333;"></div>
+                <p id="vpn-status">VÉRIFICATION...</p>
+                <button id="vpn-btn" onclick="window.location.href='siapi.ovpn'" class="btn-vip" style="display:none; background:var(--ai); color:white;">TÉLÉCHARGER CONFIG</button>
+                <button onclick="forceUpdateVPN()" style="background:none; border:none; color:#555; font-size:9px; margin-top:10px;">🔄 SYNCHRONISER SERVEUR</button>
             </div>
-        </div>
-
-        <!-- APPS -->
-        <div id="apps" class="tab-content" style="display:none;">
-            <div class="grid-4" id="app-grid"></div>
         </div>
     </div>
 
     <script>
-        const SK = "AB_ULTRA_2026_SECURE";
+        const SK = "AB_ULTRA_2026";
         const joursGratuits =; // Lundi & Vendredi
         const estGratuit = joursGratuits.includes(new Date().getDay());
+        let correctMath;
 
+        // --- SÉCURITÉ AES ---
         function save(k,v){ localStorage.setItem(k, CryptoJS.AES.encrypt(v.toString(), SK).toString()); }
-        function read(k){ let d=localStorage.getItem(k); return d?CryptoJS.AES.decrypt(d, SK).toString(CryptoJS.enc.Utf8):null; }
-
-        let duration = estGratuit ? 2 : 10, elapsed = 0;
-
-        window.onload = () => {
-            if(estGratuit) {
-                document.getElementById('welcome-msg').innerHTML = "🎁 <span style='color:var(--accent)'>JOUR CADEAU !</span>";
-                document.getElementById('auth-fields').style.display = "none";
-            }
-            const user = read('ab_user');
-            if(user && !estGratuit) document.getElementById('user-name').style.display="none";
-            document.getElementById('display-points').innerText = read('ab_pts') || 0;
-            startLock();
-            checkVPN();
-            renderApps();
-        };
-
-        function startLock() {
-            let t = setInterval(() => {
-                elapsed += 0.1;
-                document.getElementById('progress-fill').style.width = (elapsed/duration)*100 + "%";
-                if(elapsed >= duration) {
-                    clearInterval(t);
-                    const b = document.getElementById('unlock-btn');
-                    b.disabled = false; b.style.opacity = "1";
-                    b.innerHTML = estGratuit ? "ENTRER GRATUITEMENT" : "ENTRER DANS L'EMPIRE";
-                    document.getElementById('success-sound').play().catch(()=>{});
-                }
-            }, 100);
+        function read(k){ 
+            let d=localStorage.getItem(k); 
+            try { return d?CryptoJS.AES.decrypt(d, SK).toString(CryptoJS.enc.Utf8):null; } catch(e){return null;}
         }
 
+        // --- NAVIGATION ---
+        function showTab(e, id) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(e) e.currentTarget.classList.add('active');
+        }
+
+        // --- INITIALISATION ---
+        window.onload = () => {
+            const user = read('ab_user');
+            document.getElementById('welcome-msg').innerText = estGratuit ? "CADEAU DU JOUR !" : (user ? "SALUT " + user : "ACCÈS ABDOULK");
+            if(estGratuit) document.getElementById('auth-fields').style.display = "none";
+            document.getElementById('display-points').innerText = read('ab_pts') || 0;
+            
+            let elap = 0, dur = estGratuit ? 1 : 4;
+            let t = setInterval(() => {
+                elap += 0.1;
+                document.getElementById('progress-fill').style.width = (elap/dur)*100 + "%";
+                if(elap >= dur) {
+                    clearInterval(t);
+                    const b = document.getElementById('unlock-btn');
+                    b.disabled = false; b.style.opacity = "1"; b.innerText = "ENTRER DANS L'EMPIRE";
+                }
+            }, 100);
+
+            nextMath();
+            chargerQuizPres();
+            checkVPN();
+        };
+
+        // --- LOGIQUE BOUTONS ---
         document.getElementById('unlock-btn').onclick = () => {
             if(!estGratuit) {
                 const pin = document.getElementById('user-pin').value;
                 const saved = read('ab_pin');
-                if(!saved) { 
+                if(!saved) {
                     const name = document.getElementById('user-name').value;
-                    if(!name || pin.length < 4) return alert("PIN (4 chiffres) requis !");
+                    if(!name || pin.length < 4) return alert("Nom + PIN requis !");
                     save('ab_user', name); save('ab_pin', pin); save('ab_pts', 0);
                 } else if(pin !== saved) return alert("PIN INCORRECT !");
             }
@@ -185,51 +175,78 @@
             let pts = parseInt(read('ab_pts') || 0) + p;
             save('ab_pts', pts);
             document.getElementById('display-points').innerText = pts;
-            document.getElementById('success-sound').play();
-            alert(`🌟 +${p} POINTS ABDOULK !`);
+            document.getElementById('success-sound').play().catch(()=>{});
         }
 
+        // --- QUIZ MATHS ---
+        function nextMath() {
+            let x = Math.floor(Math.random()*25), y = Math.floor(Math.random()*25);
+            correctMath = x + y;
+            document.getElementById('math-q').innerText = `${x} + ${y} = ?`;
+        }
+        function checkMath() {
+            if(document.getElementById('math-input').value == correctMath) { addPts(5); alert("Bravo !"); nextMath(); }
+            else alert("Faux !");
+        }
+
+        // --- QUIZ PRÉSIDENTS ---
+        const presData = {
+            "Burkina Faso": ["Thomas Sankara", "Ibrahim Traoré"],
+            "USA": ["Joe Biden", "Donald Trump"],
+            "France": ["Jacques Chirac", "Emmanuel Macron"]
+        };
+        function chargerQuizPres() {
+            const pays = Object.keys(presData);
+            const p = pays[Math.floor(Math.random()*pays.length)];
+            const bon = presData[p][presData[p].length - 1];
+            document.getElementById('pres-q').innerText = `Qui est le Président au ${p} en 2026 ?`;
+            const opts = [bon, "Assimi Goïta", "Abdoulaye Wade", "Paul Biya"].sort(() => Math.random()-0.5);
+            const div = document.getElementById('pres-options'); div.innerHTML = "";
+            opts.forEach(o => {
+                const b = document.createElement('button'); b.className = "tab-btn"; b.style.width="100%"; b.innerText = o;
+                b.onclick = () => { if(o === bon) { addPts(10); alert("Gagné !"); chargerQuizPres(); } else alert("Non !"); };
+                div.appendChild(b);
+            });
+        }
+
+        // --- VPN & NEWS ---
         function checkVPN() {
             const h = new Date().getHours();
-            const btn = document.getElementById('vpn-btn');
-            const status = document.getElementById('vpn-status');
-            if(h >= 15 && h < 22) { btn.style.display = "block"; status.innerHTML = "✅ ACCÈS OUVERT JUSQU'À 22H"; }
-            else { status.innerHTML = "🚫 FERMÉ (OUVERT 15H-22H)"; }
+            const s = document.getElementById('vpn-status');
+            if(h >= 15 && h < 22) {
+                s.innerText = "✅ ACCÈS DISPONIBLE"; document.getElementById('vpn-btn').style.display="block";
+            } else s.innerText = "🚫 FERMÉ (15h-22h)";
         }
-
         async function searchNews() {
-            const q = document.getElementById('news-query').value;
-            const f = document.getElementById('news-feed');
-            f.innerHTML = "Scan satellite...";
+            const f = document.getElementById('news-feed'); f.innerHTML = "Scan satellite...";
             try {
                 const res = await fetch(`https://api.rss2json.com{encodeURIComponent('https://news.google.com')}`);
-                const data = await res.json();
-                f.innerHTML = "";
-                data.items.forEach(item => {
-                    f.innerHTML += `<div class="card" style="font-size:11px; border-left:3px solid var(--ai); text-align:left;">${item.title}<br><a href="${item.link}" target="_blank" onclick="addPts(2)" style="color:var(--accent); text-decoration:none; font-weight:800;">Lire (+2 Pts)</a></div>`;
+                const d = await res.json();
+                f.innerHTML = d.items.slice(0,5).map(i => `<div class="card" style="font-size:11px;">${i.title}<br><a href="${i.link}" target="_blank" onclick="addPts(2)" style="color:var(--accent);">Lire (+2)</a></div>`).join('');
+            } catch(e) { f.innerHTML = "Erreur de connexion."; }
+        }
+
+        // --- MENU ULTRA ---
+        function toggleEmpireMenu() {
+            const o = document.getElementById('empire-overlay');
+            o.style.display = o.style.display === 'block' ? 'none' : 'block';
+            if(o.style.display === 'block') {
+                const g = document.getElementById('empire-grid-full'); g.innerHTML = "";
+                const apps = [
+                    { n: "PRONOS", i: "fa-chart-bar", c: "var(--gold)", t: "apps" },
+                    { n: "IA", i: "fa-robot", c: "var(--ai)", t: "news" },
+                    { n: "VPN", i: "fa-shield-alt", c: "var(--accent)", t: "vpn" },
+                    { n: "CASH", i: "fa-play", c: "#fff", t: "cinema" }
+                ];
+                apps.forEach(a => {
+                    g.innerHTML += `<div onclick="showTab(null, '${a.t}'); toggleEmpireMenu();" style="background:#111; padding:15px; border-radius:15px; text-align:center; border:1px solid #222;">
+                    <i class="fas ${a.i}" style="color:${a.c}; font-size:20px;"></i><br><span style="font-size:8px;">${a.n}</span></div>`;
                 });
-            } catch(e) { f.innerHTML = "Erreur satellite."; }
+            }
         }
 
-        function renderApps() {
-            const g = document.getElementById('app-grid');
-            for(let i=1; i<=16; i++) g.innerHTML += `<div class="card" style="padding:15px; text-align:center; background:#111;"><i class="fas fa-cube" style="color:var(--accent); font-size:20px;"></i><br><small style="font-size:8px; color:#555;">App ${i}</small></div>`;
-        }
-
-        function showTab(e, id) {
-            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).style.display = 'block';
-            e.currentTarget.classList.add('active');
-        }
-
-        setInterval(() => {
-            const sites = ["FORMATION IA", "VPN PREMIUM", "PRONOS GOLD"];
-            document.getElementById('viral-name').innerText = sites[Math.floor(Math.random()*sites.length)];
-            document.getElementById('viral-radar').style.display = "block";
-            setTimeout(() => document.getElementById('viral-radar').style.display="none", 8000);
-        }, 120000);
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
     </script>
 </body>
     </html>
-    
+
