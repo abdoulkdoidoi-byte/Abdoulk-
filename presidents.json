@@ -1,0 +1,17 @@
+{
+  "burkina faso": [
+    {"n": "Maurice Yaméogo", "p": "1959-1966"},
+    {"n": "Thomas Sankara", "p": "1983-1987"},
+    {"n": "Blaise Compaoré", "p": "1987-2014"},
+    {"n": "Ibrahim Traoré", "p": "2022-Présent"}
+  ],
+  "france": [
+    {"n": "Charles de Gaulle", "p": "1959-1969"},
+    {"n": "Emmanuel Macron", "p": "2017-Présent"}
+  ],
+  "usa": [
+    {"n": "Franklin D. Roosevelt", "p": "1933-1945"},
+    {"n": "Joe Biden", "p": "2021-Présent"}
+  ]
+}
+
