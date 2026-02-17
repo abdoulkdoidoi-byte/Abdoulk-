@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master - Abdoulk Diodoi</title>
+    <style>
+        body { background: #050505; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .quiz-card { background: #111; padding: 30px; border-radius: 20px; border: 2px solid #ffeb3b; max-width: 400px; margin: auto; }
+        .q { font-size: 1.5rem; margin-bottom: 20px; color: #ffeb3b; }
+        input { width: 80%; padding: 12px; border-radius: 10px; border: none; margin-bottom: 10px; font-size: 1rem; }
+        button { background: #ffeb3b; color: black; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="quiz-card">
+        <h1>🧮 MATHS FLASH</h1>
+        <div id="question" class="q">Chargement...</div>
+        <input type="number" id="answer" placeholder="Ta réponse">
+        <br><br>
+        <button onclick="check()">VALIDER</button>
+        <p>Score : <span id="score">0</span></p>
+        <p style="font-size: 10px; color: #555;">Par Abdoulk Diodoi</p>
+    </div>
+    <script>
+        let s=0, a;
+        function n() {
+            let x=Math.floor(Math.random()*20), y=Math.floor(Math.random()*20);
+            a=x+y; document.getElementById('question').innerText=`${x} + ${y} = ?`;
+            document.getElementById('answer').value="";
+        }
+        function check() {
+            if(document.getElementById('answer').value == a) {
+                s++; document.getElementById('score').innerText=s; alert("🎉 Bravo !"); n();
+            } else { alert("❌ Faux, réessaye !"); }
+        }
+        n();
+    </script>
+</body>
+</html>
