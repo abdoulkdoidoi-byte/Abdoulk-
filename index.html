@@ -24,9 +24,13 @@
         .card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 15px; position: relative; }
         .btn-vip { background: linear-gradient(45deg, var(--accent), #008f4c); color: black; padding: 12px; border-radius: 12px; text-align: center; font-weight: 800; display: block; width: 100%; border: none; cursor: pointer; text-decoration: none; margin-top: 10px; }
         
-        #lock-screen { position: fixed; inset: 0; background: #000; z-index: 10001; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; transition: 0.5s; }
-        .progress-bg { width: 80%; height: 6px; background: #222; border-radius: 10px; margin: 20px 0; overflow: hidden; }
-        #progress-fill { width: 0%; height: 100%; background: var(--accent); transition: width 0.1s linear; }
+
+ <div id="lock-screen">
+    <div style="border: 3px solid var(--accent); width:60px; height:60px; border-radius:15px; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:30px; font-weight:800; margin-bottom:10px;">AB</div>
+    <h2 id="welcome-msg">SYSTÈME PRÊT</h2>
+    <div class="progress-bg"><div id="progress-fill"></div></div>
+    <button id="unlock-btn" class="btn-vip" disabled style="width:220px; opacity:0.3;">INITIALISATION</button>
+</div>
         
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); } }
         #btn-empire-menu { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #004d32; border: 3px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10000; cursor: pointer; animation: pulse-green 2s infinite; }
@@ -39,7 +43,6 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- LOCK SCREEN SANS INPUTS -->
         <div style="border: 3px solid var(--accent); width:60px; height:60px; border-radius:15px; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:30px; font-weight:800; margin-bottom:10px;">AB</div>
         <h2 id="welcome-msg">INITIALISATION...</h2>
         <div class="progress-bg"><div id="progress-fill"></div></div>
