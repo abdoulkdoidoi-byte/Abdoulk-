@@ -3,202 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>EDU-EXPLOSION | Par Abdoulk Diodoi</title>
+    <title>AB | EDU-EXPLOSION - Abdoulk Diodoi</title>
 
-    <!-- SÉCURITÉ & SEO -->
-    <meta name="description" content="IA, 1000 Films, Jeux, Cours et Marketplace par Abdoulk Diodoi.">
-    <meta property="og:title" content="🔴 EMPIRE EDU-EXPLOSION : Tout-en-Un">
-    <meta property="og:image" content="icon.png">
-    <meta name="theme-color" content="#ff0050">
-    <link rel="manifest" href="manifest.json">
-
-    <!-- POLICES & ICONES -->
+    <!-- STYLE PREMIUM AB (VERT FONCÉ & NOIR) -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
-
-    <!-- ADSENSE APPROBATION -->
-    <script async src="https://pagead2.googlesyndication.com" crossorigin="anonymous"></script>
-
+    <link rel="manifest" href="manifest.json">
+    
     <style>
-        :root { --accent: #ff0050; --ai: #00d2ff; --gold: #ffc107; --bet: #00e676; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
+        :root { --primary: #002b1b; --accent: #00ff88; --bg: #050505; --card: #111; --ai: #00d2ff; }
         body { margin: 0; background: var(--bg); color: white; font-family: 'Poppins', sans-serif; overflow-x: hidden; -webkit-user-select: none; }
         
-        header { background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 15px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-weight: 800; color: var(--accent); letter-spacing: 3px; font-size: 1.4rem; }
+        header { background: var(--primary); padding: 20px; text-align: center; border-bottom: 3px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
+        .logo-ab { font-size: 2.5rem; font-weight: 800; color: var(--accent); letter-spacing: 5px; }
 
-        .nav-tabs { display: flex; overflow-x: auto; background: #111; padding: 10px; gap: 10px; scrollbar-width: none; border-bottom: 1px solid #222; }
-        .tab-btn { background: var(--glass); border: 1px solid #333; color: #888; padding: 8px 20px; border-radius: 50px; cursor: pointer; font-size: 12px; white-space: nowrap; transition: 0.3s; }
-        .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 0 15px var(--accent); border: none; }
+        .nav-tabs { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 10px; scrollbar-width: none; }
+        .tab-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 10px 25px; border-radius: 50px; cursor: pointer; white-space: nowrap; font-size: 13px; }
+        .tab-btn.active { background: var(--accent); color: black; font-weight: bold; border: none; }
 
         .container { padding: 15px; max-width: 800px; margin: auto; }
-        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; margin-bottom: 20px; backdrop-filter: blur(10px); }
+        .card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
         
-        .btn-vip { background: linear-gradient(45deg, var(--accent), #ff5e00); color: white; padding: 15px; border-radius: 15px; text-align: center; text-decoration: none; font-weight: 600; display: block; margin: 10px 0; border: none; cursor: pointer; width: 100%; }
+        .btn-vip { background: linear-gradient(45deg, var(--accent), #008f4c); color: black; padding: 15px; border-radius: 15px; text-align: center; text-decoration: none; font-weight: 800; display: block; margin: 10px 0; border: none; width: 100%; cursor: pointer; }
         .btn-wa { background: #25d366; color: white; padding: 12px; border-radius: 15px; text-align: center; text-decoration: none; font-weight: 600; display: block; margin-top: 10px; }
-
+        
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center; }
         .tab-content { display: none; animation: fadeIn 0.4s; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
+        @keyframes fadeIn { from {opacity: 0; transform: scale(0.98);} to {opacity: 1; transform: scale(1);} }
 
         #lock-screen { position: fixed; inset: 0; background: #000; z-index: 10001; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; }
-        textarea, input, select { width: 100%; padding: 12px; border-radius: 10px; background: #111; color: white; border: 1px solid #333; margin-bottom: 10px; box-sizing: border-box; }
-        
-        marquee { background: var(--accent); color: white; padding: 5px; font-size: 12px; font-weight: bold; }
+        textarea, input, select { width: 100%; padding: 12px; border-radius: 10px; background: #000; color: white; border: 1px solid #333; margin-bottom: 10px; }
+        marquee { background: var(--accent); color: black; font-weight: bold; padding: 5px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- 🔒 VERROU DE SÉCURITÉ ABDOULK -->
+    <!-- 🔒 VERROU AB SÉCURISÉ -->
     <div id="lock-screen">
-        <div style="background:var(--accent); width:80px; height:80px; border-radius:25px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; box-shadow:0 0 30px var(--accent);"><i class="fas fa-shield-alt" style="font-size:35px;"></i></div>
-        <h1 style="font-weight:800;">EDU-EXPLOSION 2026</h1>
-        <p>Abonnez-vous pour débloquer l'Empire d'<b>Abdoulk Diodoi</b>.</p>
-        <a href="[LIEN_YOUTUBE_CONFIRMATION]" target="_blank" onclick="unlock()" class="btn-vip" style="width:220px;">S'ABONNER & ENTRER</a>
+        <div style="border: 4px solid var(--accent); width:80px; height:80px; border-radius:20px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:var(--accent); font-size:40px; font-weight:800;">AB</div>
+        <h1 style="color:white;">BIENVENUE CHEZ ABDOULK</h1>
+        <p>Abonnez-vous pour débloquer l'Empire (150 Mo).</p>
+        <a href="LIEN_YOUTUBE_CONFIRMATION" target="_blank" onclick="unlock()" class="btn-vip" style="width:200px;">S'ABONNER</a>
     </div>
 
-    <header><div class="logo">EDU-EXPLOSION</div></header>
-    
-    <marquee>🔴 ALERTES : Matchs en direct, Nouveaux Films Indous, Pronos VIP dispos ! 🔴</marquee>
+    <header><div class="logo-ab">AB</div></header>
+    <marquee>🔥 ALERTES : IA Professeur activée | 1000 Films dispo | Pronos VIP Cote 5.0 | Marketplace ouverte ! 🔥</marquee>
 
     <div class="nav-tabs">
         <div class="tab-btn active" onclick="showTab('home')">🏠 Accueil</div>
-        <div class="tab-btn" onclick="showTab('world')">🌍 Nations</div>
         <div class="tab-btn" onclick="showTab('ia')">🤖 IA Prof</div>
         <div class="tab-btn" onclick="showTab('cinema')">🎬 Ciné</div>
         <div class="tab-btn" onclick="showTab('bet')">⚽ Paris</div>
-        <div class="tab-btn" onclick="showTab('market')">🛒 Marché</div>
+        <div class="tab-btn" onclick="showTab('world')">🌍 Nations</div>
     </div>
 
     <div class="container">
-        
         <!-- 🏠 ACCUEIL -->
         <div id="home" class="tab-content active">
             <div class="card">
-                <h2><i class="fas fa-search" style="color:var(--ai);"></i> RECHERCHE MONDIALE</h2>
-                <input type="text" id="mainSearch" onkeyup="globalSearch()" placeholder="Films, Pays, Cours, Apps...">
-                <div id="searchRes" style="display:none; background:#1a1a1a; padding:10px; border-radius:10px; border:1px solid var(--ai);"></div>
+                <h2><i class="fas fa-search" style="color:var(--ai);"></i> RECHERCHE GLOBALE</h2>
+                <input type="text" id="mSearch" onkeyup="search()" placeholder="Chercher un film, un cours, un pays...">
             </div>
-            
-            <div class="card" style="border:1px solid var(--gold);">
-                <h3 style="color:var(--gold);">💎 PASS VIP 150 MO</h3>
-                <p style="font-size:12px;">Accès illimité aux 1000 films et corrections IA détaillées.</p>
-                <a href="[LIEN_FEDAPAY_500F]" class="btn-wa" style="background:#ff6600;">ORANGE MONEY (500F)</a>
-                <a href="[LIEN_PAYPAL_1$]" class="btn-vip" style="background:#0070ba; box-shadow:none;">PAYPAL / CARTE (1$)</a>
+            <div class="card" style="border:1px solid var(--accent);">
+                <h3 style="color:var(--accent);">👑 PASS VIP ABDOULK</h3>
+                <p style="font-size:12px;">Accès illimité aux 150 Mo hors-ligne (Films, Cours, Jeux).</p>
+                <a href="https://wa.me" class="btn-wa">ORANGE MONEY (500 FCFA)</a>
             </div>
-
             <div class="card">
-                <h2><i class="fas fa-th" style="color:var(--ai);"></i> SUPER-PORTAIL</h2>
-                <div class="grid-4" id="portal-items"></div>
-            </div>
-        </div>
-
-        <!-- 🌍 NATIONS & HISTOIRE -->
-        <div id="world" class="tab-content">
-            <div class="card">
-                <h2>🌍 ATLAS & PRÉSIDENTS</h2>
-                <input type="text" id="cSearch" onkeyup="searchNation()" placeholder="Chercher un pays (ex: Burkina)...">
-                <div id="cResult" style="margin-top:15px; text-align:center;"></div>
+                <h2><i class="fas fa-th"></i> NOS 35 APPS</h2>
+                <div class="grid-4" id="app-grid"></div>
             </div>
         </div>
 
         <!-- 🤖 IA -->
         <div id="ia" class="tab-content">
-            <div class="card" style="border:2px solid var(--ai);">
-                <h2>🤖 CORRECTEUR IA (CP1 -> UNI)</h2>
-                <textarea id="ia-in" rows="5" placeholder="Colle ton sujet ici..."></textarea>
-                <button onclick="runIA()" class="btn-vip" style="background:var(--ai); color:black;">CORRIGER L'EXERCICE</button>
-                <div id="ia-res" style="margin-top:15px; display:none; padding:15px; background:rgba(0,0,0,0.5); border-radius:15px; border-left:4px solid var(--ai);"></div>
+            <div class="card" style="border: 2px solid var(--ai);">
+                <h2>🤖 PROFESSEUR IA UNIVERSEL</h2>
+                <textarea id="ia-in" rows="5" placeholder="Colle ton sujet ici (Maths, Philo, etc.)..."></textarea>
+                <button onclick="askIA()" class="btn-vip" style="background:var(--ai); border:none;">CORRIGER</button>
+                <div id="ia-res" style="display:none; margin-top:10px; padding:15px; background:#000; border-radius:10px;"></div>
             </div>
         </div>
 
-        <!-- ⚽ PARIS & BET -->
-        <div id="bet" class="tab-content">
-            <div class="card" style="border:2px solid var(--bet);">
-                <h2 style="color:var(--bet);">⚽ ZONE PARIS SPORTIFS</h2>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div style="background:#0d47a1; padding:15px; border-radius:15px; text-align:center;">
-                        <b>1XBET</b><br><small>Code: EXPLOSION</small>
-                        <a href="https://1xbet.com" class="btn-vip" style="font-size:10px; padding:8px; margin-top:5px;">S'INSCRIRE</a>
-                    </div>
-                    <div style="background:#fbc02d; padding:15px; border-radius:15px; text-align:center; color:black;">
-                        <b>MELBET</b><br><small>Code: EXPLOSION</small>
-                        <a href="https://melbet.com" class="btn-vip" style="font-size:10px; padding:8px; margin-top:5px; background:black;">S'INSCRIRE</a>
-                    </div>
-                </div>
-                <a href="https://wa.me" class="btn-wa" style="background:var(--bet); color:black;">🎯 VOIR LE COUPON VIP (200F)</a>
-            </div>
-        </div>
-
-        <!-- 🛒 MARCHÉ & SAGESSE -->
-        <div id="market" class="tab-content">
+        <!-- 🌍 MONDE & HISTOIRE -->
+        <div id="world" class="tab-content">
             <div class="card">
-                <h2>🛒 MARKETPLACE SÉCURISÉE</h2>
-                <a href="[LIEN_GOOGLE_FORM]" class="btn-wa">VENDRE UN OBJET (500F)</a>
-            </div>
-            <div class="card" style="border-left:5px solid #e91e63;">
-                <h2>📜 PLUME & CONSEILS</h2>
-                <p id="quote" style="font-style:italic; font-size:14px; padding-left:10px;"></p>
-                <button onclick="newQuote()" class="btn-vip" style="background:transparent; border:1px solid #444; font-size:11px;">AUTRE SAGESSE</button>
+                <h2>🌍 ATLAS & PRÉSIDENTS</h2>
+                <input type="text" id="cSearch" onkeyup="searchNation()" placeholder="Chercher un pays...">
+                <div id="cResult"></div>
             </div>
         </div>
     </div>
 
-    <footer style="text-align:center; padding:40px; font-size:10px; color:#444; border-top:1px solid #222;">
-        <p>Propriétaire Officiel : <b>Abdoulk Diodoi</b></p>
+    <footer style="text-align:center; padding:30px; font-size:11px; color:#555; background:#000;">
+        <p>Propriétaire : <b>Abdoulk Diodoi</b></p>
         <p>Email : abdoulk.diodoi@gmail.com</p>
-        <p>🛡️ Certifié Sécurisé | <a href="#privacy" style="color:#444;">Confidentialité</a> | <a href="LICENSE.txt" style="color:#444;">Licence</a></p>
+        <p>🛡️ Certifié par AB-Security | <a href="LICENSE.txt" style="color:#555;">Licence Officielle</a></p>
     </footer>
 
-    <!-- CHAT SÉCURISÉ TAWK.TO -->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script");
-        s1.async=true; s1.src='https://embed.tawk.to[VOTRE_ID_TAWK]/default';
-        s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
-
     <script>
-        // LOGIQUE NAVIGATION
-        function showTab(t) {
-            document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-            document.getElementById(t).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        // VERROU
+        function showTab(t) { document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active')); document.getElementById(t).classList.add('active'); event.currentTarget.classList.add('active'); }
         function unlock() { setTimeout(()=>document.getElementById('lock-screen').style.display='none', 4000); }
-
-        // IA CORRECTEUR
-        function runIA() {
-            const r=document.getElementById('ia-res'); r.style.display="block"; r.innerHTML="<i class='fas fa-spinner fa-spin'></i> Analyse IA d'Abdoulk en cours...";
-            setTimeout(()=>r.innerHTML="<b>CORRECTION TERMINÉE :</b> Voici les points clés... <br><br><span style='color:red'>Payez 200F Orange Money pour débloquer les calculs détaillés.</span>", 3000);
-        }
-
-        // PORTAIL
-        const apps = [
-            {n:"FB", i:"fa-facebook", c:"#1877f2"}, {n:"WA", i:"fa-whatsapp", c:"#25d366"},
-            {n:"TIKTOK", i:"fa-tiktok", c:"#ff0050"}, {n:"YT", i:"fa-youtube", c:"red"},
-            {n:"IA", i:"fa-robot", c:"var(--ai)"}, {n:"PAYS", i:"fa-globe", c:"#4caf50"},
-            {n:"FILMS", i:"fa-film", c:"var(--accent)"}, {n:"BET", i:"fa-bolt", c:"var(--bet)"}
-        ];
-        apps.forEach(a=>document.getElementById('portal-items').innerHTML += `<div><i class="fab ${a.i} fas ${a.i}" style="color:${a.c}; font-size:24px; background:#1a1a1a; padding:12px; border-radius:15px; display:block; margin-bottom:5px;"></i><small style="font-size:9px;">${a.n}</small></div>`);
-
-        // SAGESSE
-        const quotes = ["Le succès est un voyage, pas une destination.", "Éduquer un enfant, c'est éduquer une nation.", "L'argent est un serviteur, pas un maître.", "La discipline bat le talent."];
-        function newQuote() { document.getElementById('quote').innerText = quotes[Math.floor(Math.random()*quotes.length)]; }
-        newQuote();
-
-        // PWA HORS-LIGNE
+        function askIA() { const r=document.getElementById('ia-res'); r.style.display="block"; r.innerHTML="Analyse IA en cours..."; setTimeout(()=>r.innerHTML="<b>CORRECTION PRÊTE :</b> Voici le plan... Payez 200F pour les détails.", 3000); }
+        const apps = [{n:"IA", i:"fa-robot", c:"var(--ai)"},{n:"PAYS", i:"fa-globe", c:"#4caf50"},{n:"FILMS", i:"fa-film", c:"var(--accent)"},{n:"PARIS", i:"fa-bolt", c:"#ffeb3b"}];
+        apps.forEach(a=>document.getElementById('app-grid').innerHTML += `<div><i class="fas ${a.i}" style="color:${a.c}; font-size:25px; background:#1a1a1a; padding:15px; border-radius:15px; display:block; margin-bottom:5px;"></i><small>${a.n}</small></div>`);
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-
-        // SÉCURITÉ ABDOULK
-        document.onkeydown = (e) => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false; };
     </script>
 </body>
-  </html>
-
+</html>
