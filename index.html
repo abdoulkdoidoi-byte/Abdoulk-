@@ -116,25 +116,20 @@
             </div>
         </div>
     </div>
- <script>
+<script>
     const SK = "AB_ULTRA_2026";
     let correctMath;
 
-    // --- SÉCURITÉ AES ---
-    function save(k,v){ localStorage.setItem(k, CryptoJS.AES.encrypt(v.toString(), SK).toString()); }
-    function read(k){ 
-        let d=localStorage.getItem(k); 
-        try { return d?CryptoJS.AES.decrypt(d, SK).toString(CryptoJS.enc.Utf8):null; } catch(e){return null;}
-    }
+    // --- SYSTÈME DE SAUVEGARDE SIMPLE ---
+    function save(k,v){ localStorage.setItem(k, v); }
+    function read(k){ return localStorage.getItem(k); }
 
-    // --- INITIALISATION AU CHARGEMENT ---
+    // --- OUVERTURE AUTOMATIQUE APRÈS CHARGEMENT ---
     window.onload = () => {
-        const user = read('ab_user');
         const ptsDisp = document.getElementById('display-points');
         if(ptsDisp) ptsDisp.innerText = read('ab_pts') || 0;
 
-        // Animation Barre de Chargement
-        let elap = 0, dur = 2.5; 
+        let elap = 0, dur = 2.0; // Chargement de 2 secondes
         let t = setInterval(() => {
             elap += 0.1;
             let fill = document.getElementById('progress-fill');
@@ -146,23 +141,14 @@
                 if(b) {
                     b.disabled = false; 
                     b.style.opacity = "1"; 
-                    b.innerText = "ENTRER DANS L'EMPIRE";
+                    b.innerText = "ACCÈS AUTORISÉ";
                     
+                    // L'APPLICATION S'OUVRE DIRECTEMENT AU CLIC SANS PIN
                     b.onclick = () => {
-                        const name = document.getElementById('user-name').value;
-                        const pin = document.getElementById('user-pin').value;
-                        
-                        if(!read('ab_pin')) {
-                            if(name.length < 2 || pin.length < 4) return alert("Guerrier ! Nom + PIN 4 chiffres requis !");
-                            save('ab_user', name); save('ab_pin', pin); save('ab_pts', 0);
+                        document.getElementById('lock-screen').style.opacity = "0";
+                        setTimeout(() => {
                             document.getElementById('lock-screen').style.display = "none";
-                        } else {
-                            if(pin === read('ab_pin')) {
-                                document.getElementById('lock-screen').style.display = "none";
-                            } else {
-                                alert("⛔ PIN INCORRECT !");
-                            }
-                        }
+                        }, 500);
                     };
                 }
             }
@@ -190,7 +176,7 @@
         if (navigator.vibrate) navigator.vibrate(40);
     }
 
-    // --- MATHS ---
+    // --- JEU MATHS ---
     function nextMath() {
         let x = Math.floor(Math.random() * 40), y = Math.floor(Math.random() * 40);
         correctMath = x + y;
@@ -204,48 +190,31 @@
             addPts(5);
             input.value = "";
             nextMath();
-        } else {
-            alert("❌ RÉESSAYE !");
-        }
+        } else { alert("❌ RÉESSAYE !"); }
     }
 
-    // --- QUIZ PRÉSIDENTS (CORRIGÉ) ---
-    const presData = { 
-        "Burkina Faso": "Ibrahim Traoré", 
-        "Mali": "Assimi Goïta", 
-        "Niger": "Abdourahamane Tiani", 
-        "Sénégal": "Bassirou Diomaye Faye" 
-    };
-
+    // --- QUIZ PRÉSIDENTS ---
+    const presData = { "Burkina Faso": "Ibrahim Traoré", "Mali": "Assimi Goïta", "Niger": "Abdourahamane Tiani", "Sénégal": "Bassirou Diomaye Faye" };
     function chargerQuizPres() {
         const pays = Object.keys(presData);
         const p = pays[Math.floor(Math.random() * pays.length)];
         const bon = presData[p];
         const qText = document.getElementById('pres-q');
         if(qText) qText.innerText = `Qui dirige le ${p} en 2026 ?`;
-        
-        const mauvaises = ["Alassane Ouattara", "Paul Biya", "Patrice Talon", "Macky Sall"];
-        // On mélange la bonne réponse avec une mauvaise au hasard
+        const mauvaises = ["Alassane Ouattara", "Paul Biya", "Patrice Talon"];
         let faux = mauvaises[Math.floor(Math.random()*mauvaises.length)];
         const opts = [bon, faux].sort(() => Math.random() - 0.5);
-        
         const div = document.getElementById('pres-options');
         if(div) {
             div.innerHTML = "";
             opts.forEach(o => {
                 const b = document.createElement('button');
                 b.className = "tab-btn";
-                b.style.width = "100%";
-                b.style.marginBottom = "5px";
+                b.style.width = "100%"; b.style.marginBottom = "5px";
                 b.innerText = o;
                 b.onclick = () => {
-                    if(o === bon) { 
-                        addPts(10); 
-                        alert("👑 CORRECT ! (+10 PTS)");
-                        chargerQuizPres(); 
-                    } else { 
-                        alert("❌ ERREUR !"); 
-                    }
+                    if(o === bon) { addPts(10); alert("👑 CORRECT !"); chargerQuizPres(); } 
+                    else { alert("❌ ERREUR !"); }
                 };
                 div.appendChild(b);
             });
@@ -257,7 +226,6 @@
         if (navigator.vibrate) navigator.vibrate(30);
         const o = document.getElementById('empire-overlay');
         const g = document.getElementById('empire-grid-full');
-
         if (o.style.display === "none" || o.style.display === "") {
             o.style.display = "block";
             const apps = [
@@ -267,12 +235,10 @@
                 { n: "CASH", i: "fa-coins", c: "#fff", t: "apps" }
             ];
             g.innerHTML = apps.map(a => `
-                <div onclick="showTab(null, '${a.t}'); toggleEmpireMenu();" 
-                     style="background:#111; padding:20px; border-radius:15px; text-align:center; border:1px solid #222; cursor:pointer;">
+                <div onclick="showTab(null, '${a.t}'); toggleEmpireMenu();" style="background:#111; padding:20px; border-radius:15px; text-align:center; border:1px solid #222; cursor:pointer;">
                     <i class="fas ${a.i}" style="color:${a.c}; font-size:24px; margin-bottom:10px;"></i><br>
                     <span style="font-size:10px; font-weight:bold; color:white;">${a.n}</span>
-                </div>
-            `).join('');
+                </div>`).join('');
             setTimeout(() => o.classList.add('show'), 10);
         } else {
             o.classList.remove('show');
@@ -284,19 +250,14 @@
     async function searchNews() {
         const f = document.getElementById('news-feed');
         if(!f) return;
-        f.innerHTML = "<div style='text-align:center;'>🛰️ SCAN EN COURS...</div>";
+        f.innerHTML = "🛰️ SCAN EN COURS...";
         try {
             const res = await fetch(`https://api.rss2json.com`);
             const d = await res.json();
-            f.innerHTML = d.items.slice(0, 4).map(i => `
-                <div class="card" style="font-size:11px; border-left: 3px solid var(--accent);">
-                    <b style="color:var(--accent);">${i.title}</b><br><br>
-                    <a href="${i.link}" target="_blank" onclick="addPts(2)" style="color:var(--ai); text-decoration:none;">LIRE (+2 PTS)</a>
-                </div>
-            `).join('');
-        } catch(e) { f.innerHTML = "📡 Erreur de connexion satellite."; }
+            f.innerHTML = d.items.slice(0, 4).map(i => `<div class="card" style="font-size:11px; border-left: 3px solid var(--accent);"><b>${i.title}</b><br><br><a href="${i.link}" target="_blank" onclick="addPts(2)" style="color:var(--ai); text-decoration:none;">LIRE (+2)</a></div>`).join('');
+        } catch(e) { f.innerHTML = "📡 Erreur Satellite."; }
     }
-  </script>
+</script>    
     </body> 
 </html>
     
